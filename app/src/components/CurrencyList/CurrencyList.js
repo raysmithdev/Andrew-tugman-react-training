@@ -1,11 +1,14 @@
 import React from 'react';
 import {List, ListItem} from 'material-ui/List';
-import ContentInbox from 'material-ui/svg-icons/content/inbox';
 
-const CurrencyList = (props) => (
+const CurrencyList = ({ currencies }) => {
+  return (
     <List>
-      <ListItem primaryText={props.currencyName} leftIcon={<ContentInbox />} />
+      {currencies.map((currency, i) => (
+          <ListItem key={i} primaryText={currency.currency + ' : ' + currency.rate} />
+      ))}
     </List>
-);
+  )
+}
 
 export default CurrencyList;

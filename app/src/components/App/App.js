@@ -17,15 +17,31 @@ class App extends Component {
   componentDidMount() {
     fetch('http://api.fixer.io/latest')
     .then(response => response.json())
-    .then(apiData => this.setState({ currencies: apiData.rates, baseCurrency: apiData.base }))
+    .then(apiData => {
+      const currencies = []
+
+      for(const currency in apiData.rates) {
+        let obj = {
+          currency,
+          rate: apiData.rates[currency]
+        }
+
+        currencies.push(obj)
+      }
+
+      this.setState({
+        currencies,
+        baseCurrency: apiData.base
+      })
+    })
     .catch(err => console.log(err))
   }
 
   render() {
     return (
       <div>
-        <Navbar />
-        <CurrencyList currencyName="USDCAD" />
+        <Navbar currency={this.state.baseCurrency} />
+        <CurrencyList currencies={this.state.currencies} />
       </div>
     );
   }

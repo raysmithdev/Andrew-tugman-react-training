@@ -1,9 +1,9 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
 
-const Navbar = () => (
+const Navbar = ({ currency }) => (
   <AppBar
-    title="Title"
+    title={currency}
     iconClassNameRight="muidocs-icon-navigation-expand-more"
   />
 );
